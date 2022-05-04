@@ -1,7 +1,9 @@
-from flask import Flask, redirect, render_template, url_for, request,g
+from flask import Flask, redirect, render_template, url_for, request
+
+from .config import appConfig
 
 app = Flask(__name__)
-
+app.config.from_object(appConfig)
 
 @app.route('/')
 def index():
@@ -18,7 +20,7 @@ def login():
     if username and passwd:
         return redirect('/manager')
     else:
-        return render_template('login.html', msg='用户名和密码不能为空')
+        return render_template('auth/login.html', msg='用户名和密码不能为空')
 
 
 @app.route('/register/')
