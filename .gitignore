@@ -7,7 +7,10 @@ __pycache__/
 *.so
 
 # db json
-db/*.json
+*.json
+
+# 测试python功能
+pytest.py
 
 # Distribution / packaging
 .Python
