@@ -10,6 +10,7 @@ python = "^3.10"
 Flask = "^2.1.1"
 tinydb = "^4.7.0"
 pandas = "^1.4.2"
+pre-commit = "^2.18.1"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.6.0"
