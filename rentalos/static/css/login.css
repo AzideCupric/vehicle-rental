@@ -105,6 +105,11 @@ html::before {
     box-shadow: 0 0 2rem -0.5rem rgb(0 0 0 / 15%);
 }
 
+.right .msg{
+    font-size: 0.5rem;
+    color: rgb(17, 100, 89);
+}
+
 .right .help{
     display: flex;
     justify-content: space-between;
