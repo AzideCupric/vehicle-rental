@@ -14,7 +14,7 @@ html::before {
     height: 100%;
     position: fixed;
     z-index: -1;
-    background: linear-gradient(120deg,#43c6ac 0%,#f8ffae 100%) no-repeat;
+    background: linear-gradient(120deg, #43c6ac 0%, #f8ffae 100%) no-repeat;
 }
 
 ::selection {

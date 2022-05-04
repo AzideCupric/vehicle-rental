@@ -1,1 +1,1 @@
-DB_LINK:str='./db/'  
+DB_LINK: str = './db/'

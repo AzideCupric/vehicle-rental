@@ -3,20 +3,20 @@
     overflow: hidden;
     height: 25em;
     width: 40em;
-    background-color: rgba(255,255,255,55%);
+    background-color: rgba(255, 255, 255, 55%);
     border-radius: 1.5em;
     margin: 10% auto;
     box-shadow: 0 0 1em 0.2em rgb(0 0 0 / 10%);
 }
 
-.box .left{
+.box .left {
     position: relative;
     height: 100%;
     width: 35%;
     background-color: #237a57;
 }
 
-.box .left::before{
+.box .left::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -27,26 +27,26 @@
     opacity: 93%;
 }
 
-.box .right{
+.box .right {
     display: flex;
     width: 65%;
     flex-direction: column;
     align-items: center;
 }
 
-.box .right h4{
+.box .right h4 {
     color: rgb(8, 144, 126);
     font-size: 1.5em;
     margin-top: 2.5em;
 }
 
-.box .right form{
+.box .right form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.box .right form .login-box{
+.box .right form .login-box {
     outline: none;
     width: 60%;
     height: 1.5em;
@@ -55,8 +55,8 @@
     padding: 0.3em 0 0 0.5em;
     border: none;
     border-bottom: 1px solid rgb(8, 144, 126);
-    color:rgb(8, 144, 126);
-    background-color: rgba(0,0,0,0);
+    color: rgb(8, 144, 126);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .right form .login-box:focus {
@@ -65,11 +65,11 @@
     padding: 0.3em 0 0 0.5em;
 }
 
-.right .submit-button{
+.right .submit-button {
     width: 60%;
     height: 3em;
     color: #f6f6f6;
-    background-image: linear-gradient(120deg,#34e89e 0%,#237a57 100%);
+    background-image: linear-gradient(120deg, #34e89e 0%, #237a57 100%);
     font-size: 0.9rem;
     border: none;
     border-radius: 0.4rem;
@@ -77,25 +77,25 @@
     transform: translateX(-50%);
 }
 
-.right .submit-button:hover{
+.right .submit-button:hover {
     box-shadow: 0 0 2rem -0.5rem rgb(0 0 0 / 15%);
 }
 
-.right .msg{
+.right .msg {
     font-size: 0.5rem;
     color: rgb(17, 100, 89);
 }
 
-.right .help{
+.right .help {
     display: flex;
     justify-content: space-between;
     margin: auto;
     width: 20%;
 }
 
-.right .help a{
+.right .help a {
     font-size: 0.8rem;
     margin-top: 1rem;
-    padding:  0 1rem;
+    padding: 0 1rem;
     color: #666;
 }

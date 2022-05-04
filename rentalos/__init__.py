@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect,render_template,url_for
+from flask import Flask, redirect, render_template, url_for
 
 
 def create_app(test_config=None):
@@ -25,6 +25,7 @@ def create_app(test_config=None):
     @app.route('/')
     def to_login():
         return redirect(url_for('auth.login'))
+
     @app.route('/index')
     def index():
         return render_template('os/hello.html')
