@@ -114,7 +114,7 @@ html::before {
     display: flex;
     justify-content: space-between;
     margin: auto;
-    width: 40%;
+    width: 20%;
 }
 
 .right .help a{

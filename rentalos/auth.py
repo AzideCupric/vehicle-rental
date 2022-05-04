@@ -60,3 +60,17 @@ def login():
 
         flash(error)
     return render_template('auth/login.html')
+
+@auth_bp.before_app_request
+def load_logged_in_user():
+    user_doc_id = session.get('user_doc_id')
+
+    if user_doc_id is None:
+        g.user = None
+    else:
+        g.user = get_db().get(doc_id=user_doc_id)
+
+@auth_bp.route('/exit')
+def exit():
+    session.clear()
+    return redirect(url_for('auth.login'))
