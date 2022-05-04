@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/login.css')}}">
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="box">
+        <div class="left"></div>
+        <div class="right">
+            <h4>Register<h4>
+            <form method="post">
+                <input class="login-box" type="text" name="username" spellcheck="false" placeholder="用户名" required>
+                <input class="login-box" type="password" name="password" placeholder="密码" required>
+                <input class="submit-button" type="submit" value="注册">
+                {% for msg in get_flashed_messages() %}
+                <div class="msg">{{msg}}</div>
+                {% endfor %}
+            </form>
+            <div class="help">
+                <a href="{{url_for('auth.login')}}">登陆账号</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

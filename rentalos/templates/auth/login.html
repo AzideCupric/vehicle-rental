@@ -1,28 +1,27 @@
-<!doctype html>
-<html lang="zh">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/login.css')}}">
-    <title>Manager Login</title>
-</head>
-<body>
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/login.css')}}">
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
     <div class="box">
         <div class="left"></div>
         <div class="right">
             <h4>Login<h4>
             <form method="post">
-                <input class="login-box" type="text" name="username" spellcheck="false" placeholder="用户名">
-                <input class="login-box" type="password" name="password" placeholder="密码">
+                <input class="login-box" type="text" name="username" spellcheck="false" placeholder="用户名" required>
+                <input class="login-box" type="password" name="password" placeholder="密码" required>
                 <input class="submit-button" type="submit" value="登录">
-                <!-- div class="msg">{{msg}}</div -->
+                {% for msg in get_flashed_messages() %}
+                <div class="msg">{{msg}}</div>
+                {% endfor %}
             </form>
             <div class="help">
                 <a href="{{url_for('auth.register')}}">注册账号</a>
-                <!-- a href="{{url_for('hello')}}">找回密码</a-->
             </div>
         </div>
     </div>
-</body>
+{% endblock %}

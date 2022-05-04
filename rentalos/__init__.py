@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, redirect,render_template,url_for
 
 
 def create_app(test_config=None):
@@ -22,8 +22,11 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.auth_bp)
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello,World'
+    @app.route('/')
+    def to_login():
+        return redirect(url_for('auth.login'))
+    @app.route('/index')
+    def index():
+        return render_template('os/hello.html')
 
     return app

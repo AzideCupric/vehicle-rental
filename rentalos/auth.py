@@ -1,4 +1,5 @@
 import functools
+from textwrap import indent
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from rentalos.db import get_db
@@ -44,12 +45,12 @@ def login():
     if request.method == 'POST':
         username=request.form['username']
         password=request.form['password']
-        db=get_db()
+        auth_table=get_db().table('user')
         error=None
-        user=db.get(where('username')==username)
+        user=auth_table.get(where('username')==username)
 
         if user is None:
-            error='该用户名不存在'
+            error=f'该用户名:{username}不存在'
         elif not check_password_hash(user['password'],password):
             error='该密码与用户名不匹配'
 

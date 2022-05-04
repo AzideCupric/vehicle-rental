@@ -1,3 +1,4 @@
+from textwrap import indent
 from tinydb import TinyDB
 
 import click
@@ -8,7 +9,7 @@ from flask.cli import with_appcontext
 def get_db() -> TinyDB:
     '''向flask全局变量中添加数据库'''
     if 'db' not in g:
-        g.db = TinyDB(current_app.config['DATABASE'])
+        g.db = TinyDB(current_app.config['DATABASE'],indent=4)
 
     return g.db
 
