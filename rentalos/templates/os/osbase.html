@@ -1,0 +1,25 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - rentalos</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manager.css') }}">
+{% block link %}{% endblock %}
+<nav>
+  <h1>rentalos</h1>
+  <ul>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.exit') }}">登出</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">注册</a>
+      <li><a href="{{ url_for('auth.login') }}">登录</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
