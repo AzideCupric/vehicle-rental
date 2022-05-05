@@ -1,0 +1,33 @@
+{% extends 'os/osbase.html' %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/table.css')}}">
+{% endblock %}
+
+{% block header %}
+    <h1>{% block title %}管理{% endblock %}</h1>
+    {% if g.user %}
+    <a href="{{ url_for('manager.add') }}" class="action">添加</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <table class="dataframe" border="1">
+        <thead>
+            <tr>
+                <th>车辆名</th>
+                <th>出借状态</th>
+                <th>出借次数</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in datas %}
+            <tr>
+                <td>{{ data['carname'] }}</td>
+                <td>{{ data['status'] }}</td>
+                <td>{{ data['count'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

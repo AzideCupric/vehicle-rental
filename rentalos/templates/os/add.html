@@ -1,0 +1,17 @@
+{% extends 'os/osbase.html' %}
+
+{% block header %}
+<h1>{% block title %}添加条目{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form class="cardata" method="post">
+    <label for="carname">车辆名称</label>
+    <input type="text" id="carname" name="carname" value="{{ request.form['carname'] }}" required>
+    <label for="status">出借状态</label>
+    <input type="text" id="status" name="status" value="{{ request.form['status'] }}" required>
+    <label for="count">出借次数</label>
+    <input type="text" id="count" name="count" value="{{ request.form['count'] }}" required>
+    <input type="submit" value="添加">
+</form>
+{% endblock %}

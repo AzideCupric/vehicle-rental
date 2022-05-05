@@ -3,10 +3,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/manager.css') }}">
 {% block link %}{% endblock %}
 <nav>
-  <h1>rentalos</h1>
+  <h1>车辆租赁管理</h1>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('index') }}">车辆管理</a>
+      <li><a href="{{ url_for('index') }}">租车管理</a>
+      <li><a href="{{ url_for('index') }}">还车管理</a>
+      <li><a href="{{ url_for('index') }}">修车管理</a>
+      <li><a href="{{ url_for('index') }}">利润分析</a>
       <li><a href="{{ url_for('auth.exit') }}">登出</a>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">注册</a>

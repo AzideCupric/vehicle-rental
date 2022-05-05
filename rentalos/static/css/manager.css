@@ -127,6 +127,24 @@ header .action {
     resize: vertical;
 }
 
+.cardata {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cardata input[type=text] {
+    outline: none;
+    width: 40%;
+    height: 1.5em;
+    font-size: 1rem;
+    margin-top: 0.1em;
+    border: none;
+    border-bottom: 1px solid #377ba8;
+    color: #0b3d5e;
+    background-color: rgba(0,0,0,0);
+}
+
 input.danger {
     color: #cc2f2e;
 }
