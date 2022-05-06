@@ -26,10 +26,15 @@
             {% for data in datas %}
             <tr>
                 <td>{{ data['carname'] }}</td>
-                <td>{{ data['status'] }}</td>
+                <td>{% if data['status'] == 'in' %}
+                    在库
+                    {%  else %}
+                    借出
+                    {% endif %}
+                </td>
                 <td>{{ data['platenum'] }}</td>
                 <td>{{ data['count'] }}</td>
-                <td><a href="{{ url_for('carinfo.update',doc_id=data.doc_id) }}">修改</a>|<a href="">删除</a></td>
+                <td><a href="{{ url_for('carinfo.update',doc_id=data.doc_id) }}">修改</a>|<a href="{{ url_for('carinfo.delete',doc_id=data.doc_id) }}">删除</a></td>
             </tr>
             {% endfor %}
         </tbody>

@@ -104,3 +104,12 @@ def update(doc_id):
             return redirect(url_for("carinfo.index"))
 
     return render_template("os/carinfo/update.html", item=item)
+
+
+@carinfo_bp.route("/<int:doc_id>/delete", methods=["GET", "POST"])
+@login_required
+def delete(doc_id):
+    item = get_item(doc_id)
+    db = get_db().table("carinfo")
+    db.remove(doc_ids=[item.doc_id])
+    return redirect(url_for("carinfo.index"))
