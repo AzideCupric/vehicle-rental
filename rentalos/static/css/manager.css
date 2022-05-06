@@ -146,6 +146,10 @@ header .action {
     background-color: rgba(0,0,0,0);
 }
 
+.cardata select {
+    width: 20%;
+}
+
 input.danger {
     color: #cc2f2e;
 }

@@ -49,3 +49,7 @@ def add():
             return redirect(url_for("manager.index"))
 
     return render_template("os/add.html")
+
+
+def get_item(doc_id, type):
+    item = get_db().table(type).get(doc_id=doc_id)
