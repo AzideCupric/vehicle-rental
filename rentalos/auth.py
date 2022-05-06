@@ -68,7 +68,7 @@ def login():
         if error is None:
             session.clear()
             session["user_doc_id"] = user.doc_id
-            return redirect(url_for("index"))
+            return redirect(url_for("carinfo.index"))
 
         flash(error)
     return render_template("auth/login.html")

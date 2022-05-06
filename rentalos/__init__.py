@@ -20,11 +20,12 @@ def create_app(test_config=None):
     from . import db
 
     db.init_app(app)
-    from . import auth, manager
+
+    from . import auth, carinfo_manager
 
     app.register_blueprint(auth.auth_bp)
-    app.register_blueprint(manager.manager_bp)
-    app.add_url_rule("/", endpoint="index")
+    app.register_blueprint(carinfo_manager.carinfo_bp)
+    app.add_url_rule("/", endpoint="carinfo.index")
 
     @app.route("/hello/")
     def hello():

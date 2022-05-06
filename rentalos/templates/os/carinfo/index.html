@@ -7,7 +7,7 @@
 {% block header %}
     <h1>{% block title %}{{ pagename }}{% endblock %}</h1>
     {% if g.user %}
-    <a href="{{ url_for('manager.add') }}" class="action">添加</a>
+    <a href="{{ url_for('carinfo.add') }}" class="action">添加</a>
     {% endif %}
 {% endblock %}
 
