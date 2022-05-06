@@ -10,9 +10,9 @@ manager_bp = Blueprint("manager", __name__)
 @manager_bp.route("/")
 @login_required
 def index():
-    data_table = get_db().table("data")
-    datas = data_table.all()
-    return render_template("os/index.html", datas=datas)
+    carinfo_table = get_db().table("carinfo")
+    datas = carinfo_table.all()
+    return render_template("os/index.html", datas=datas, pagename="车辆管理")
 
 
 @manager_bp.route("/add", methods=("GET", "POST"))
@@ -21,6 +21,7 @@ def add():
     if request.method == "POST":
         carname = request.form["carname"]
         status = request.form["status"]
+        platenum = request.form["platenum"]
         count = request.form["count"]
         error = None
 
@@ -28,14 +29,23 @@ def add():
             error = "需要输入车辆名称"
         elif not status:
             error = "需要输入出借状态"
+        elif not platenum:
+            error = "需要输入车牌号"
         elif not count:
             error = "需要输入出借次数"
 
         if error is not None:
             flash(error)
         else:
-            data_table = get_db().table("data")
-            data_table.insert({"carname": carname, "status": status, "count": count})
+            data_table = get_db().table("carinfo")
+            data_table.insert(
+                {
+                    "carname": carname,
+                    "status": status,
+                    "platenum": platenum,
+                    "count": count,
+                }
+            )
             return redirect(url_for("manager.index"))
 
     return render_template("os/add.html")

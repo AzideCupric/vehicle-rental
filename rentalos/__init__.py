@@ -26,16 +26,6 @@ def create_app(test_config=None):
     app.register_blueprint(manager.manager_bp)
     app.add_url_rule("/", endpoint="index")
 
-    """
-    @app.route('/')
-    def to_login():
-        return redirect(url_for('auth.login'))
-
-    @app.route('/index')
-    def index():
-        return render_template('os/hello.html')
-    """
-
     @app.route("/hello/")
     def hello():
         return render_template("os/hello.html")

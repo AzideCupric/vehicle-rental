@@ -10,6 +10,8 @@
     <input type="text" id="carname" name="carname" value="{{ request.form['carname'] }}" required>
     <label for="status">出借状态</label>
     <input type="text" id="status" name="status" value="{{ request.form['status'] }}" required>
+    <label for="status">车牌号</label>
+    <input type="text" id="platenum" name="platenum" value="{{ request.form['platenum'] }}" required>
     <label for="count">出借次数</label>
     <input type="text" id="count" name="count" value="{{ request.form['count'] }}" required>
     <input type="submit" value="添加">

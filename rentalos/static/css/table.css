@@ -17,8 +17,9 @@ tr {
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
+    margin-top: 1em;
     border: 1px solid #cbcbcb;
-    width: 28em;
+    width: 100%;
 }
 
 .dataframe caption {

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block header %}
-    <h1>{% block title %}管理{% endblock %}</h1>
+    <h1>{% block title %}{{ pagename }}{% endblock %}</h1>
     {% if g.user %}
     <a href="{{ url_for('manager.add') }}" class="action">添加</a>
     {% endif %}
@@ -17,7 +17,9 @@
             <tr>
                 <th>车辆名</th>
                 <th>出借状态</th>
+                <th>车牌号</th>
                 <th>出借次数</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +27,9 @@
             <tr>
                 <td>{{ data['carname'] }}</td>
                 <td>{{ data['status'] }}</td>
+                <td>{{ data['platenum'] }}</td>
                 <td>{{ data['count'] }}</td>
+                <td><a href="">修改</a>|<a href="">删除</a></td>
             </tr>
             {% endfor %}
         </tbody>
