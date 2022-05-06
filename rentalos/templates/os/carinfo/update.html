@@ -1,0 +1,30 @@
+{% extends 'os/osbase.html' %}
+
+{% block header %}
+<h1>{% block title %}修改条目{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form class="cardata" method="post">
+    <label for="carname">车辆名称</label>
+    <input type="text" id="carname" name="carname" value="{{ request.form['carname'] or item['carname'] }}" required>
+    <label for="status">出借状态</label>
+    <select name="status" id="status" required>
+        <option value="out" 
+        {% if item['status'] == 'out' %}
+        selected="selected"
+        {% endif %}
+        >借出</option>
+        <option value="in" 
+        {% if item['status'] == 'in' %}
+        selected="selected"
+        {% endif %} 
+        >在库</option>
+    </select>
+    <label for="status">车牌号</label>
+    <input type="text" id="platenum" name="platenum" value="{{ request.form['platenum'] or item['platenum'] }}" required>
+    <label for="count">出借次数</label>
+    <input type="text" id="count" name="count" value="{{ request.form['count'] or item['count'] }}" required>
+    <input type="submit" value="修改">
+</form>
+{% endblock %}

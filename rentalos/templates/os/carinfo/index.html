@@ -29,7 +29,7 @@
                 <td>{{ data['status'] }}</td>
                 <td>{{ data['platenum'] }}</td>
                 <td>{{ data['count'] }}</td>
-                <td><a href="">修改</a>|<a href="">删除</a></td>
+                <td><a href="{{ url_for('carinfo.update',doc_id=data.doc_id) }}">修改</a>|<a href="">删除</a></td>
             </tr>
             {% endfor %}
         </tbody>

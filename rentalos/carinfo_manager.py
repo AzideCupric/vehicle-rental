@@ -59,8 +59,8 @@ def add():
     return render_template("os/carinfo/add.html")
 
 
-def get_item(doc_id: int, type: str):
-    item = get_db().table(type).get(doc_id=doc_id)
+def get_item(doc_id: int):
+    item = get_db().table("carinfo").get(doc_id=doc_id)
     if item is None:
         abort(404, f"不存在记录{doc_id}!")
 
@@ -91,7 +91,7 @@ def update(doc_id):
         if error is not None:
             flash(error)
         else:
-            data_table = get_db().table(type)
+            data_table = get_db().table("carinfo")
             data_table.update(
                 {
                     "carname": carname,
@@ -103,4 +103,4 @@ def update(doc_id):
             )
             return redirect(url_for("carinfo.index"))
 
-    return render_template("os/update.html", item=item)
+    return render_template("os/carinfo/update.html", item=item)
