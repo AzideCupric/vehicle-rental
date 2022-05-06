@@ -34,7 +34,7 @@
                 </td>
                 <td>{{ data['platenum'] }}</td>
                 <td>{{ data['count'] }}</td>
-                <td><a href="{{ url_for('carinfo.update',doc_id=data.doc_id) }}">修改</a>|<a href="{{ url_for('carinfo.delete',doc_id=data.doc_id) }}">删除</a></td>
+                <td><a href="{{ url_for('carinfo.update',doc_id=data.doc_id) }}">修改</a>|<a class="danger" onclick='return confirm("确认删除？");' href="{{ url_for('carinfo.delete',doc_id=data.doc_id) }}">删除</a></td>
             </tr>
             {% endfor %}
         </tbody>
