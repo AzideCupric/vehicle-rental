@@ -1,0 +1,35 @@
+{% extends 'os/osbase.html' %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/table.css')}}">
+{% endblock %}
+
+{% block header %}
+    <h1>{% block title %}{{ pagename }}{% endblock %}</h1>
+    {% if g.user %}
+    <a href="{{ url_for('carinfo.add') }}" class="action">添加</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<table class="dataframe" border="1">
+    <thead>
+        <tr>
+            <th>租车人</th>
+            <th>起租时间</th>
+            <th>还车时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items.values() %}
+        <tr>
+            <td>{{ item["user"] }}</td>
+            <td>{{ time_format(item["start"]) }}</td>
+            <td>{{ time_format(item["stop"]) }}</td>
+            <td>删除</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

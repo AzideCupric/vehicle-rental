@@ -2,14 +2,14 @@
 <title>{% block title %}{% endblock %} - rentalos</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/manager.css') }}">
 {% block link %}{% endblock %}
+<div id="osbackground"></div>
 <nav>
   <h1>车辆租赁管理</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
+      <li><span>管理员: {{ g.user['username'] }}</span>
       <li><a href="{{ url_for('carinfo.index') }}">车辆管理</a>
-      <li><a href="{{ url_for('carinfo.index') }}">租车管理</a>
-      <li><a href="{{ url_for('carinfo.index') }}">还车管理</a>
+      <li><a href="{{ url_for('carrental.index') }}">租还管理</a>
       <li><a href="{{ url_for('carinfo.index') }}">修车管理</a>
       <li><a href="{{ url_for('carinfo.index') }}">利润分析</a>
       <li><a href="{{ url_for('auth.exit') }}">登出</a>
