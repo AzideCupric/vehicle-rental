@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
@@ -82,8 +83,9 @@ def add(doc_id):
                 idx = e.args[0]
                 error = f"当前时间与已有的第{idx}条记录冲突"
             else:
+                new_uuid = uuid.uuid3(uuid.NAMESPACE_DNS, str(starttime))
                 new_item = {
-                    (len(items) + 1): {
+                    str(new_uuid): {
                         "user": user,
                         "start": starttime,
                         "stop": stoptime,
@@ -97,3 +99,13 @@ def add(doc_id):
         flash(error)
 
     return render_template("os/carrental/add.html")
+
+
+@carrental_bp.route("/<int:doc_id>/delete/<string:rental_id>", methods=["GET", "POST"])
+@login_required
+def delete(doc_id, rental_id):
+    table = get_db().table("carinfo")
+    items: dict = table.get(doc_id=doc_id)["rental"]
+    items.pop(rental_id)
+    table.update(set("rental", items), doc_ids=[doc_id])
+    return redirect(url_for("carrental.info", doc_id=doc_id))

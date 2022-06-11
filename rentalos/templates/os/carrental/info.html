@@ -23,13 +23,16 @@
         </tr>
     </thead>
     <tbody>
-        {% for item in items.values() %}
+        {% for uuid,item in items.items() %}
         <tr>
             <td>{{ item["user"] }}</td>
             <td>{{ time_format(item["start"]) }}</td>
             <td>{{ time_format(item["stop"]) }}</td>
             <td>{{ item["cost"] }}</td>
-            <td>删除</td>
+            <td><a href="{{ url_for('carrental.delete', doc_id=doc_id, rental_id=uuid) }}">
+                删除
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
