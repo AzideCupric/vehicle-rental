@@ -164,6 +164,18 @@ header .action {
     background-color: rgba(0,0,0,0);
 }
 
+.cardata input[type=datetime-local] {
+    outline: none;
+    width: 20%;
+    height: 1.5em;
+    font-size: 1rem;
+    margin-top: 0.1em;
+    border: none;
+    border-bottom: 1px solid #377ba8;
+    color: #0b3d5e;
+    background-color: rgba(0,0,0,0);
+}
+
 .cardata select {
     width: 20%;
 }

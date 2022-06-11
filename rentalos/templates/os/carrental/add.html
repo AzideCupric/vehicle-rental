@@ -1,0 +1,21 @@
+{% extends 'os/osbase.html' %}
+
+{% block header %}
+<h1>{% block title %}添加租借记录{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form class="cardata" method="post">
+    <label for="user">租车人名称</label>
+    <input type="text" id="user" name="user" value="{{ request.form['user'] }}" placeholder="租车人名称" required>
+    <label for="start">起租时间</label>
+    <input type="datetime-local" id="start" name="start" value="{{ request.form['start'] }}" 
+    pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+    <label for="stop">还车时间</label>
+    <input type="datetime-local" id="stop" name="stop" value="{{ request.form['stop'] }}" 
+    pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+    <label for="cost">租金</label>
+    <input type="text" name="cost" id="cost" value="{{ request.form['cost'] }}" required>
+    <input type="submit" value="添加记录">
+</form>
+{% endblock %}

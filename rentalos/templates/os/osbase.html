@@ -9,8 +9,6 @@
     {% if g.user %}
       <li><span>管理员: {{ g.user['username'] }}</span>
       <li><a href="{{ url_for('carinfo.index') }}">车辆管理</a>
-      <li><a href="{{ url_for('carrental.index') }}">租还管理</a>
-      <li><a href="{{ url_for('carinfo.index') }}">修车管理</a>
       <li><a href="{{ url_for('carinfo.index') }}">利润分析</a>
       <li><a href="{{ url_for('auth.exit') }}">登出</a>
     {% else %}
