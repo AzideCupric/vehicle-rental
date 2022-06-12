@@ -13,14 +13,18 @@ from rentalos.db import get_db
 carrental_bp = Blueprint("carrental", __name__, url_prefix="/carrental")
 
 
-def get_item(doc_id: int):
-    raw_item = get_db().table("carinfo").get(doc_id=doc_id)
+def get_items(doc_id: int):
+    table = get_db().table("carinfo")
+    raw_item = table.get(doc_id=doc_id)
 
     if raw_item is None:
         abort(404, f"不存在记录{doc_id}!")
     else:
-        item = raw_item["rental"]
-
+        item = {}
+        try:
+            item = raw_item["rental"]
+        except KeyError:
+            table.update({"rental": {}}, doc_ids=[doc_id])
     return item
 
 
@@ -34,10 +38,11 @@ def time_format2str(timestamp: int) -> str:
 @carrental_bp.route("/<int:doc_id>/info")
 @login_required
 def info(doc_id):
-    items = get_item(doc_id)
+    items = get_items(doc_id)
+    sorted_items = sorted(items.items(), key=lambda x: x[1]["start"])
     return render_template(
         "os/carrental/info.html",
-        items=items,
+        items=sorted_items,
         doc_id=doc_id,
         time_format=time_format2str,
     )
@@ -66,11 +71,13 @@ def add(doc_id):
             error = "需要输入还车时间"
         elif not cost:
             error = "需要输入租金"
+        elif starttime >= stoptime:
+            error = "租车时间需要小于还车时间"
 
         if error is None:
             table = get_db().table("carinfo")
             try:
-                items: dict = table.get(doc_id=doc_id)["rental"]
+                items: dict = get_items(doc_id)
                 for idx, item in enumerate(items.values()):
                     if (
                         item["start"] <= starttime < item["stop"]
@@ -105,7 +112,7 @@ def add(doc_id):
 @login_required
 def delete(doc_id, rental_id):
     table = get_db().table("carinfo")
-    items: dict = table.get(doc_id=doc_id)["rental"]
+    items: dict = get_items(doc_id)
     items.pop(rental_id)
     table.update(set("rental", items), doc_ids=[doc_id])
     return redirect(url_for("carrental.info", doc_id=doc_id))

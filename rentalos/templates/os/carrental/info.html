@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for uuid,item in items.items() %}
+        {% for uuid,item in items %}
         <tr>
             <td>{{ item["user"] }}</td>
             <td>{{ time_format(item["start"]) }}</td>
