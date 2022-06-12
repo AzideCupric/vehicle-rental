@@ -23,7 +23,6 @@ def add():
         carname = request.form["carname"]
         status = request.form["status"]
         platenum = request.form["platenum"]
-        count = request.form["count"]
         error = None
 
         if not carname:
@@ -32,20 +31,13 @@ def add():
             error = "需要输入出借状态"
         elif not platenum:
             error = "需要输入车牌号"
-        elif not count:
-            error = "需要输入出借次数"
 
         if error is None:
             try:
                 data_table = get_db().table("carinfo")
                 if not data_table.get(where("platenum") == platenum):
                     data_table.insert(
-                        {
-                            "carname": carname,
-                            "status": status,
-                            "platenum": platenum,
-                            "count": count,
-                        }
+                        {"carname": carname, "status": status, "platenum": platenum}
                     )
                 else:
                     raise LookupError("data existed!")
@@ -76,7 +68,6 @@ def update(doc_id):
         carname = request.form["carname"]
         status = request.form["status"]
         platenum = request.form["platenum"]
-        count = request.form["count"]
         error = None
 
         if not carname:
@@ -85,20 +76,13 @@ def update(doc_id):
             error = "需要输入出借状态"
         elif not platenum:
             error = "需要输入车牌号"
-        elif not count:
-            error = "需要输入出借次数"
 
         if error is not None:
             flash(error)
         else:
             data_table = get_db().table("carinfo")
             data_table.update(
-                {
-                    "carname": carname,
-                    "status": status,
-                    "platenum": platenum,
-                    "count": count,
-                },
+                {"carname": carname, "status": status, "platenum": platenum},
                 doc_ids=[doc_id],
             )
             return redirect(url_for("carinfo.index"))

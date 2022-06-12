@@ -2,6 +2,9 @@
 
 {% block header %}
 <h1>{% block title %}修改条目{% endblock %}</h1>
+{% if g.user %}
+    <a href="{{ url_for('carinfo.index') }}" class="action">返回</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -20,11 +23,14 @@
         selected="selected"
         {% endif %} 
         >在库</option>
+        <option value="repair" 
+        {% if item['status'] == 'repair' %}
+        selected="selected"
+        {% endif %} 
+        >维修</option>
     </select>
     <label for="status">车牌号</label>
     <input type="text" id="platenum" name="platenum" value="{{ request.form['platenum'] or item['platenum'] }}" required>
-    <label for="count">出借次数</label>
-    <input type="text" id="count" name="count" value="{{ request.form['count'] or item['count'] }}" required>
     <input type="submit" value="修改">
 </form>
 {% endblock %}

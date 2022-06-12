@@ -3,7 +3,6 @@ from datetime import datetime
 
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for
 from pytz import timezone
-from tinydb import where
 from tinydb.operations import set
 from werkzeug.exceptions import abort
 
@@ -101,6 +100,7 @@ def add(doc_id):
                 }
                 items.update(new_item)
                 table.update(set("rental", items), doc_ids=[doc_id])
+                table.update(set("count", len(items)), doc_ids=[doc_id])
                 return redirect(url_for("carrental.info", doc_id=doc_id))
 
         flash(error)
@@ -176,4 +176,5 @@ def delete(doc_id, rental_id):
     items: dict = get_items(doc_id)
     items.pop(rental_id)
     table.update(set("rental", items), doc_ids=[doc_id])
+    table.update(set("count", len(items)), doc_ids=[doc_id])
     return redirect(url_for("carrental.info", doc_id=doc_id))

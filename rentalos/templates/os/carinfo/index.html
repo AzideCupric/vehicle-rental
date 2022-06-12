@@ -19,6 +19,7 @@
                 <th>出借状态</th>
                 <th>车牌号</th>
                 <th>出借次数</th>
+                <th>维修次数</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -28,16 +29,21 @@
                 <td>{{ data['carname'] }}</td>
                 <td>{% if data['status'] == 'in' %}
                     在库
-                    {%  else %}
+                    {%  elif data['status'] == 'out' %}
                     借出
+                    {% else %}
+                    维修
                     {% endif %}
                 </td>
                 <td>{{ data['platenum'] }}</td>
                 <td>{{ data['count'] }}</td>
+                <td>{{ data['repair_count'] }}</td>
                 <td>
                     <a href="{{ url_for('carinfo.update', doc_id=data.doc_id) }}">修改</a>
                     |
                     <a href="{{ url_for('carrental.info', doc_id=data.doc_id) }}">租还</a>
+                    |
+                    <a href="{{ url_for('carrepair.info', doc_id=data.doc_id) }}">维修</a>
                     |
                     <a class="danger" onclick='return confirm("确认删除？");' 
                     href="{{ url_for('carinfo.delete',doc_id=data.doc_id) }}">

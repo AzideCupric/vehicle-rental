@@ -2,6 +2,9 @@
 
 {% block header %}
 <h1>{% block title %}添加车辆{% endblock %}</h1>
+{% if g.user %}
+    <a href="{{ url_for('carinfo.index') }}" class="action">返回</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -13,11 +16,10 @@
     <select name="status" id="status" required>
         <option value="out">借出</option>
         <option value="in">在库</option>
+        <option value="repair">维修</option>
     </select>
     <label for="status">车牌号</label>
     <input type="text" id="platenum" name="platenum" value="{{ request.form['platenum'] }}" required>
-    <label for="count">出借次数</label>
-    <input type="text" id="count" name="count" value="{{ request.form['count'] }}" required>
     <input type="submit" value="添加">
 </form>
 {% endblock %}

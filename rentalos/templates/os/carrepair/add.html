@@ -1,0 +1,21 @@
+{% extends 'os/osbase.html' %}
+
+{% block header %}
+<h1>{% block title %}添加维修记录{% endblock %}</h1>
+{% if g.user %}
+    <a href="{{ url_for('carrepair.info', doc_id=doc_id) }}" class="action">返回</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<form class="cardata" method="post">
+    <label for="place">维修地点</label>
+    <input type="text" id="place" name="place" value="{{ request.form['place'] }}" placeholder="详细地址" required>
+    <label for="time">维修时间</label>
+    <input type="datetime-local" id="time" name="time" value="{{ request.form['time'] }}" 
+    pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+    <label for="cost">维修费用</label>
+    <input type="text" name="cost" id="cost" value="{{ request.form['cost'] }}" required>
+    <input type="submit" value="添加记录">
+</form>
+{% endblock %}
