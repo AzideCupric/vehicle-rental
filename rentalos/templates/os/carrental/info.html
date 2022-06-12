@@ -8,6 +8,7 @@
     <h1>{% block title %}车辆租赁详情{% endblock %}</h1>
     {% if g.user %}
     <a href="{{ url_for('carrental.add', doc_id=doc_id) }}" class="action">添加</a>
+    <a href="{{ url_for('carinfo.index') }}" class="action">返回</a>
     {% endif %}
 {% endblock %}
 
@@ -29,7 +30,13 @@
             <td>{{ time_format(item["start"]) }}</td>
             <td>{{ time_format(item["stop"]) }}</td>
             <td>{{ item["cost"] }}</td>
-            <td><a href="{{ url_for('carrental.delete', doc_id=doc_id, rental_id=uuid) }}">
+            <td>
+                <a href="{{ url_for('carrental.update', doc_id=doc_id, rental_id=uuid) }}">
+                修改
+                </a>
+                |
+                <a class="danger" onclick='return confirm("确认删除？");'
+                href="{{ url_for('carrental.delete', doc_id=doc_id, rental_id=uuid) }}">
                 删除
                 </a>
             </td>

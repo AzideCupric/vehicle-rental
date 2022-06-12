@@ -2,20 +2,23 @@
 
 {% block header %}
 <h1>{% block title %}修改租借记录{% endblock %}</h1>
+{% if g.user %}
+    <a href="{{ url_for('carrental.info', doc_id=doc_id) }}" class="action">返回</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
 <form class="cardata" method="post">
     <label for="user">租车人名称</label>
-    <input type="text" id="user" name="user" value="{{ request.form['user'] }}" placeholder="租车人名称" required>
+    <input type="text" id="user" name="user" value="{{ request.form['user'] or item['user'] }}" placeholder="租车人名称" required>
     <label for="start">起租时间</label>
-    <input type="datetime-local" id="start" name="start" value="{{ request.form['start'] }}" 
+    <input type="datetime-local" id="start" name="start" value="{{ request.form['start'] or time_format2form(item['start']) }}" 
     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
     <label for="stop">还车时间</label>
-    <input type="datetime-local" id="stop" name="stop" value="{{ request.form['stop'] }}" 
+    <input type="datetime-local" id="stop" name="stop" value="{{ request.form['stop'] or time_format2form(item['stop']) }}" 
     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
     <label for="cost">租金</label>
-    <input type="text" name="cost" id="cost" value="{{ request.form['cost'] }}" required>
-    <input type="submit" value="添加记录">
+    <input type="text" name="cost" id="cost" value="{{ request.form['cost'] or item['cost'] }}" required>
+    <input type="submit" value="修改记录">
 </form>
 {% endblock %}

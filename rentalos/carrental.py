@@ -78,7 +78,7 @@ def add(doc_id):
             table = get_db().table("carinfo")
             try:
                 items: dict = get_items(doc_id)
-                for idx, item in enumerate(items.values()):
+                for idx, item in enumerate(items.values(), start=1):
                     if (
                         item["start"] <= starttime < item["stop"]
                         or item["start"] <= stoptime < item["stop"]
@@ -105,7 +105,68 @@ def add(doc_id):
 
         flash(error)
 
-    return render_template("os/carrental/add.html")
+    return render_template("os/carrental/add.html", doc_id=doc_id)
+
+
+def time_format2form(timestamp: int) -> str:
+    dtime = datetime.fromtimestamp(timestamp, tz=timezone("Asia/Shanghai"))
+    timestr = dtime.strftime("%Y-%m-%dT%H:%M")
+    return timestr
+
+
+@carrental_bp.route("/<int:doc_id>/update/<string:rental_id>", methods=["GET", "POST"])
+@login_required
+def update(doc_id, rental_id):
+    items: dict[str, dict] = get_items(doc_id)
+    if request.method == "POST":
+        user = request.form["user"]
+        starttime = time_format2stamp(request.form["start"])
+        stoptime = time_format2stamp(request.form["stop"])
+        cost = request.form["cost"]
+        error = None
+
+        if not user:
+            error = "需要输入租车人姓名"
+        elif not starttime:
+            error = "需要输入租车时间"
+        elif not stoptime:
+            error = "需要输入还车时间"
+        elif not cost:
+            error = "需要输入租金"
+        elif starttime >= stoptime:
+            error = "租车时间需要小于还车时间"
+
+        if error is None:
+            table = get_db().table("carinfo")
+            try:
+                extract_items = items.copy()
+                extract_items.pop(rental_id)
+                for idx, item in enumerate(extract_items.values(), start=1):
+                    if (
+                        item["start"] <= starttime < item["stop"]
+                        or item["start"] <= stoptime < item["stop"]
+                        or starttime <= item["start"] < stoptime
+                        or starttime <= item["stop"] < stoptime
+                    ):
+                        raise LookupError(idx)
+            except LookupError as e:
+                idx = e.args[0]
+                error = f"当前时间与除该条外的第{idx}条记录冲突"
+            else:
+                items[rental_id].update(
+                    user=user, start=starttime, stop=stoptime, cost=cost
+                )
+                table.update(set("rental", items), doc_ids=[doc_id])
+                return redirect(url_for("carrental.info", doc_id=doc_id))
+
+        flash(error)
+
+    return render_template(
+        "os/carrental/update.html",
+        doc_id=doc_id,
+        item=items[rental_id],
+        time_format2form=time_format2form,
+    )
 
 
 @carrental_bp.route("/<int:doc_id>/delete/<string:rental_id>", methods=["GET", "POST"])

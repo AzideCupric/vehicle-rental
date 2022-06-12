@@ -2,6 +2,9 @@
 
 {% block header %}
 <h1>{% block title %}添加租借记录{% endblock %}</h1>
+{% if g.user %}
+    <a href="{{ url_for('carrental.info', doc_id=doc_id) }}" class="action">返回</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
