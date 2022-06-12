@@ -21,12 +21,13 @@ def create_app(test_config=None):
 
     db.init_app(app)
 
-    from . import auth, carinfo, carrental, carrepair
+    from . import auth, carinfo, carrental, carrepair, profit
 
     app.register_blueprint(auth.auth_bp)
     app.register_blueprint(carinfo.carinfo_bp)
     app.register_blueprint(carrental.carrental_bp)
     app.register_blueprint(carrepair.carrepair_bp)
+    app.register_blueprint(profit.profit_bp)
     app.add_url_rule("/", endpoint="carinfo.index")
 
     @app.route("/hello/")

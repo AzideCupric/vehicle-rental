@@ -1,0 +1,37 @@
+{% extends 'os/osbase.html' %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/table.css')}}">
+{% endblock %}
+
+{% block header %}
+    <h1>{% block title %}利润分析{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <table class="dataframe" border="1">
+        <thead>
+            <th>车辆名</th>
+            <th>车牌号</th>
+            <th>租赁次数</th>
+            <th>总租赁费用</th>
+            <th>维修次数</th>
+            <th>总维修费用</th>
+            <th>净利润</th>
+        </thead>
+        <tbody>
+            {% for car in car_list %}
+            <tr>
+                <td>{{ car.type }}</td>
+                <td>{{ car.platenum }}</td>
+                <td>{{ car.rental_count }}次</td>
+                <td>{{ car.rental_cost }}元</td>
+                <td>{{ car.repair_count }}次</td>
+                <td>{{ car.repair_cost }}元</td>
+                <td>{{ car.rental_cost-car.repair_cost }}元</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -6,7 +6,7 @@ from pytz import timezone
 from tinydb.operations import set
 from werkzeug.exceptions import abort
 
-from rentalos.auth import login, login_required
+from rentalos.auth import login_required
 from rentalos.db import get_db
 
 carrepair_bp = Blueprint("carrepair", __name__, url_prefix="/carrepair")
