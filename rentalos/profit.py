@@ -44,8 +44,8 @@ def index():
         rental_count = 0
         repair_count = 0
 
-        rentals = data["rental"]
-        repairs = data["repair"]
+        rentals = {} if not data["rental"] else data["rental"]
+        repairs = {} if not data["repair"] else data["repair"]
         for rtc, rpc in zip_longest(rentals.values(), repairs.values()):
             if rtc:
                 new_car.rental_cost += int(rtc["cost"])
