@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rentalos"
-version = "0.1.0"
+version = "0.1.1"
 description = "大二下车辆租赁管理系统课设"
 authors = ["AzideCupric <rukuy@qq.com>"]
 license = "MIT"
